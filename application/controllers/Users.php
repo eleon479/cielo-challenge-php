@@ -18,8 +18,34 @@ class Users extends CI_Controller {
 
   public function createNewUser()
   {
-    if (validateCreateRequest())
-    $this->users_model->set_users();
+    // default: returned if validation fails
+    $requestResponse = [
+      'userCreated' => FALSE,
+      'errorMessage' => 'Invalid or missing fields.'
+    ];
+    
+    // begin validation
+    if ($this->validateCreateRequest())
+    {
+      try
+      {
+        $this->users_model->set_users();
+        $requestResponse = [
+          'userCreated' => TRUE,
+          'errorMessage' => NULL
+        ];
+      }
+      catch (Exception $e)
+      {
+        // something went wrong with model / data layer
+        $requestResponse = [
+          'userCreated' => FALSE,
+          'errorMessage' => 'Internal server error...:('
+        ];
+      }
+    }
+
+    echo json_encode($requestResponse);
   }
 
 }
