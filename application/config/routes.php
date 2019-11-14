@@ -49,6 +49,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+
+// form submission endpoint (hit via ajax)
+$route['users/createNewUser'] = 'users/createNewUser';
+
+// defaulting to the user creation controller, since I removed
+// the boilerplate CI welcome pages and whatnot so there aren't any other routes
+$route['users/(:any)'] = 'users/create';
+$route['users'] = 'users/index';
+$route['default_controller'] = 'users/create';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['(:any)'] = 'users/create';
