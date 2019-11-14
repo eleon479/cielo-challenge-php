@@ -88,6 +88,35 @@
       .register-btn:hover {
         opacity:1;
       }
+
+      .notify-success {
+        background-color:springgreen;
+        color: white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        margin-top: 20px;
+        display: none;
+      }
+
+      .notify-failure {
+        background-color:tomato;
+        color: white;
+        padding: 16px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 7px;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        margin-top: 20px;
+        display: none;
+      }
+
     </style>
   </head>
   <body>
@@ -95,6 +124,8 @@
       <h1>User Info</h1>
       <p>Tell us a bit about yourself.</p>
       <hr>
+      <div class="notify notify-success">User information was submitted!</div>
+      <div class="notify notify-failure">There was a problem sending your submission.</div>
       <form class="rg-form" id="registerForm" >
         <label for="fullname"><b>Name</b></label>
         <input type="text" id="fullname" name="fullname" placeholder="Full Name" required><br/>
@@ -114,6 +145,7 @@
     </div>
     <script>
       $(document).ready(function() {
+
         $('#registerForm').validate({
           rules: {
             fullname: 'required',
@@ -128,9 +160,23 @@
             color: 'required'
           },
 
-          submitHanlder: function(form) {
-            
-          }
+          submitHandler: function(form) {
+            var url = '<?= site_url('users/createNewUser') ?>';
+
+            $.ajax({
+              url: url,
+              cache: false,
+              method: 'POST',
+              data: $(form).serializeArray(),
+              dataType: 'json',
+              success: function(response) {
+                $('.notify-success').fadeIn();
+              },
+              error: function() {
+                $('.notify-failure').fadeIn();
+              }
+            }); /* end ajax */
+          } /* end submitHandler */
         });/* end validate */
       });
     </script>
