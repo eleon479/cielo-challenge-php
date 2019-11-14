@@ -4,7 +4,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     <style type="text/css">
-      * {box-sizing: border-box}
+
+      * {
+        box-sizing: border-box
+      }
+
       html, body {
         background-color: #f9f9f9;
       }
@@ -19,6 +23,53 @@
         border: 2px solid #f1f1f1;
         border-radius: 5px;
         background-color: white;
+      }
+
+      input[type=text], 
+      input[type=date], 
+      input[type=color], 
+      input[type=email] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        border-radius: 5px;
+        background: #f1f1f1;
+      }
+
+      input[type=text]:focus, 
+      input[type=date]:focus, 
+      input[type=color]:focus, 
+      input[type=email]:focus {
+        background-color: #ddd;
+        outline: none;
+      }
+
+      input[type=date]::-webkit-inner-spin-button, 
+      input[type=date]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+      }
+
+      hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+        margin-left: -16px;
+        margin-right: -16px;
+      }
+
+      input[type=color] {
+        padding: 5px;
+        height: 50px;
+        margin-bottom: 5px;
+      }
+
+      .hint {
+        float: right;
+        font-size: 12px;
+        color:lightslategray;
+        font-style:italic;
       }
 
       .register-btn {
@@ -41,14 +92,22 @@
   </head>
   <body>
     <div class="container">
-      <form class="rg-form" id="registerForm">
+      <h1>User Info</h1>
+      <p>Tell us a bit about yourself.</p>
+      <hr>
+      <form class="rg-form" id="registerForm" >
+        <label for="fullname"><b>Name</b></label>
         <input type="text" id="fullname" name="fullname" placeholder="Full Name" required><br/>
 
+        <label for="dob"><b>Date of Birth</b></label>
         <input type="date" id="dob" name="dob" placeholder="YYYY-MM-DD" required><br/>
 
+        <label for="email"><b>E-Mail</b></label>
         <input type="email" id="email" name="email" placeholder="email@domain.com" required><br/>
 
+        <label for="color"><b>Favorite Color</b></label>
         <input type="color" id="color" name="color" placeholder="ex: Green" value="#a86fff"><br/>
+        <label class="hint" for="color">(click to pick color)</label>
         
         <button type="submit" id="createUser" class="register-btn">Submit Details</button>
       </form>
