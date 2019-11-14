@@ -114,7 +114,24 @@
     </div>
     <script>
       $(document).ready(function() {
-        $('#registerForm').validate();/* end validate */
+        $('#registerForm').validate({
+          rules: {
+            fullname: 'required',
+            dob: {
+              required: true,
+              dateISO: true
+            },
+            email: {
+              required: true,
+              email: true
+            },
+            color: 'required'
+          },
+
+          submitHanlder: function(form) {
+            
+          }
+        });/* end validate */
       });
     </script>
   </body>
